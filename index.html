@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>กันตพัฒน์ ลั่นแจ๊ะ 💘</title>
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+body {
+  overflow-x: hidden;
+  transition: box-shadow 0.3s;
+  margin: 0;
+}
+
+/* เอฟเฟกต์แสง RGB รอบเว็บ */
+@keyframes rainbowShadow {
+  0% { box-shadow: 0 0 20px red; }
+  25% { box-shadow: 0 0 20px orange; }
+  50% { box-shadow: 0 0 20px yellow; }
+  75% { box-shadow: 0 0 20px green; }
+  100% { box-shadow: 0 0 20px blue; }
+}
+
+/* Typewriter */
+.typewriter span {
+  border-right: .1em solid #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+}
+
+/* หัวใจลอย */
+.heart {
+  position: fixed;
+  font-size: 25px;
+  pointer-events: none;
+  animation: fly 2s linear forwards;
+  color: #ff4d9e;
+}
+@keyframes fly { 0% { transform: translateY(0) scale(1); opacity: 1;} 100% { transform: translateY(-200px) scale(2); opacity: 0;} }
+
+/* ดอกไม้ตก */
+.flower {
+  position: fixed;
+  font-size: 20px;
+  pointer-events: none;
+  animation: fall 4s linear forwards;
+}
+@keyframes fall { 0% { transform: translateY(-50px) rotate(0deg); opacity: 1;} 100% { transform: translateY(100vh) rotate(360deg); opacity: 0;} }
+
+/* วิดีโอพื้นหลังเต็มจอ */
+#bgVideo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -10;
+}
+</style>
+</head>
+
+<body class="text-white min-h-screen flex flex-col items-center justify-center px-4">
+
+<!-- วิดีโอพื้นหลัง -->
+<video autoplay muted loop playsinline id="bgVideo">
+  <source src="ha.mp4" type="video/mp4">
+</video>
+
+<h1 class="text-4xl font-bold text-center mb-4 typewriter" id="title"></h1>
+
+<p class="text-lg text-pink-200 text-center mb-6">
+  ถ้ากดปุ่มข้างล่างนี้… หัวใจเราจะเต้นพร้อมกัน 💓
+</p>
+
+<div class="flex flex-col items-center gap-4">
+  <button id="btnPlay" class="px-8 py-3 bg-pink-500 hover:bg-pink-600 rounded-xl text-xl shadow-lg transition">
+    ลองกดดู เขินจัง ลั่นแจ๊ะะะ 😳
+  </button>
+
+  <button id="btnHeart" class="px-6 py-2 bg-red-500 hover:bg-red-600 rounded-xl text-lg transition">
+    ส่งหัวใจ เลิฟๆ 💖
+  </button>
+
+  <button id="btnFlower" class="px-6 py-2 bg-green-500 hover:bg-green-600 rounded-xl text-lg transition">
+    ปล่อยดอกไม้ไอสาสสสส 🌸
+  </button>
+</div>
+
+<p id="msg" class="mt-6 text-2xl font-semibold text-pink-300 hidden text-center">
+  ลั่นแจ๊ะไปที อีดอกกก ❤️
+</p>
+
+<audio id="bgm" src="love.mp3" loop></audio>
+
+<script>
+const bgm = document.getElementById("bgm");
+const msg = document.getElementById("msg");
+const title = document.getElementById("title");
+const bgVideo = document.getElementById("bgVideo");
+
+// Typewriter Effect
+const text = "ผมไม่ได้แค่เขียนโค้ด 💻 แต่เขียนอนาคตที่มีคุณด้วย 💘";
+let i = 0;
+function typeWriter() {
+  if (i < text.length) {
+    title.innerHTML += text.charAt(i);
+    i++;
+    setTimeout(typeWriter, 50);
+  }
+}
+
+// เล่นเพลง + แสดงข้อความ + สร้างหัวใจ+ดอกไม้ + สั่นมือถือ + RGB glow + เริ่มวิดีโอมือถือ
+document.getElementById("btnPlay").onclick = () => {
+  bgm.play().catch(e=>console.log("Autoplay blocked"));
+  bgm.volume = 0.8;
+  msg.classList.remove("hidden");
+  typeWriter();
+
+  // เริ่มวิดีโอบนมือถือ
+  bgVideo.play().catch(e=>console.log("Video autoplay blocked"));
+
+  // RGB glow
+  document.body.style.animation = "rainbowShadow 5s infinite";
+
+  // สร้างหัวใจลอย 20 ดวง
+  for(let j=0;j<20;j++){
+    setTimeout(()=>{
+      let heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "❤";
+      heart.style.left = Math.random()*window.innerWidth + "px";
+      heart.style.top = window.innerHeight - 30 + "px";
+      document.body.appendChild(heart);
+      setTimeout(()=>heart.remove(),2000);
+    }, j*100);
+  }
+
+  // สั่นมือถือ (ถ้ารองรับ)
+  if(navigator.vibrate){
+    navigator.vibrate([100,50,100,50,200]);
+  }
+};
+
+// ปุ่มส่งหัวใจ
+document.getElementById("btnHeart").onclick = () => {
+  let heart = document.createElement("div");
+  heart.classList.add("heart");
+  heart.innerHTML = "💖";
+  heart.style.left = Math.random()*window.innerWidth + "px";
+  heart.style.top = window.innerHeight - 30 + "px";
+  document.body.appendChild(heart);
+  setTimeout(()=>heart.remove(),2000);
+
+  if(navigator.vibrate){ navigator.vibrate(200); }
+};
+
+// ปุ่มปล่อยดอกไม้
+document.getElementById("btnFlower").onclick = () => {
+  for(let j=0;j<10;j++){
+    setTimeout(()=>{
+      let flower = document.createElement("div");
+      flower.classList.add("flower");
+      flower.innerHTML = "🌸";
+      flower.style.left = Math.random()*window.innerWidth + "px";
+      flower.style.top = "-50px";
+      document.body.appendChild(flower);
+      setTimeout(()=>flower.remove(),4000);
+    }, j*200);
+  }
+
+  if(navigator.vibrate){ navigator.vibrate(300); }
+};
+</script>
+
+</body>
+</html>
