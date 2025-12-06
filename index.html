@@ -35,7 +35,10 @@ body {
   animation: fly 2s linear forwards;
   color: #ff4d9e;
 }
-@keyframes fly { 0% { transform: translateY(0) scale(1); opacity: 1;} 100% { transform: translateY(-200px) scale(2); opacity: 0;} }
+@keyframes fly { 
+  0% { transform: translateY(0) scale(1); opacity: 1;} 
+  100% { transform: translateY(-200px) scale(2); opacity: 0;} 
+}
 
 .flower {
   position: fixed;
@@ -43,8 +46,11 @@ body {
   pointer-events: none;
   animation: fall 4s linear forwards;
 }
-@keyframes fall { 0% { transform: translateY(-50px) rotate(0deg); opacity: 1;} 100% { transform: translateY(100vh) rotate(360deg); opacity: 0;} }
-  
+@keyframes fall { 
+  0% { transform: translateY(-50px) rotate(0deg); opacity: 1;} 
+  100% { transform: translateY(100vh) rotate(360deg); opacity: 0;} 
+}
+
 #bgVideo {
   position: fixed;
   top: 0;
@@ -53,6 +59,17 @@ body {
   height: 100%;
   object-fit: cover;
   z-index: -10;
+}
+
+/* ⭐ ฟันเฟืองหมุน */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.gear {
+  display: inline-block;
+  animation: spin 3s linear infinite;
 }
 </style>
 </head>
@@ -88,6 +105,7 @@ body {
 </p>
 
 <audio id="bgm" src="love.mp3" loop></audio>
+
 
 <script>
 const bgm = document.getElementById("bgm");
@@ -162,10 +180,24 @@ document.getElementById("btnFlower").onclick = () => {
 };
 </script>
 
+
+<!-- ⭐ CREDIT แบบติดขอบล่าง -->
+<footer class="fixed bottom-0 left-0 w-full text-center py-2 text-sm text-gray-300 bg-black/40 backdrop-blur-sm">
+  <div class="flex items-center justify-center gap-2">
+    <span class="gear text-xl">⚙️</span>
+    <span>2025 Kantaphat DEK69, All rights reserved.</span>
+  </div>
+
+  <div class="mt-1">
+    <a href="https://www.instagram.com/k.kxntaphatt"
+       target="_blank"
+       class="text-blue-400 hover:underline">
+      Kantaphat. ติดต่อเจ้าของเว็บ / แจ้งปัญหา
+    </a>
+  </div>
+</footer>
+
+
+
 </body>
 </html>
-
-
-
-
-
