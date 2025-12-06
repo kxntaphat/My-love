@@ -13,7 +13,6 @@ body {
   margin: 0;
 }
 
-/* เอฟเฟกต์แสง RGB รอบเว็บ */
 @keyframes rainbowShadow {
   0% { box-shadow: 0 0 20px red; }
   25% { box-shadow: 0 0 20px orange; }
@@ -22,7 +21,6 @@ body {
   100% { box-shadow: 0 0 20px blue; }
 }
 
-/* Typewriter */
 .typewriter span {
   border-right: .1em solid #fff;
   white-space: nowrap;
@@ -30,7 +28,6 @@ body {
   display: inline-block;
 }
 
-/* หัวใจลอย */
 .heart {
   position: fixed;
   font-size: 25px;
@@ -40,7 +37,6 @@ body {
 }
 @keyframes fly { 0% { transform: translateY(0) scale(1); opacity: 1;} 100% { transform: translateY(-200px) scale(2); opacity: 0;} }
 
-/* ดอกไม้ตก */
 .flower {
   position: fixed;
   font-size: 20px;
@@ -48,8 +44,7 @@ body {
   animation: fall 4s linear forwards;
 }
 @keyframes fall { 0% { transform: translateY(-50px) rotate(0deg); opacity: 1;} 100% { transform: translateY(100vh) rotate(360deg); opacity: 0;} }
-
-/* วิดีโอพื้นหลังเต็มจอ */
+  
 #bgVideo {
   position: fixed;
   top: 0;
@@ -64,7 +59,6 @@ body {
 
 <body class="text-white min-h-screen flex flex-col items-center justify-center px-4">
 
-<!-- วิดีโอพื้นหลัง -->
 <video autoplay muted loop playsinline id="bgVideo">
   <source src="ha.mp4" type="video/mp4">
 </video>
@@ -112,20 +106,16 @@ function typeWriter() {
   }
 }
 
-// เล่นเพลง + แสดงข้อความ + สร้างหัวใจ+ดอกไม้ + สั่นมือถือ + RGB glow + เริ่มวิดีโอมือถือ
 document.getElementById("btnPlay").onclick = () => {
   bgm.play().catch(e=>console.log("Autoplay blocked"));
   bgm.volume = 0.8;
   msg.classList.remove("hidden");
   typeWriter();
 
-  // เริ่มวิดีโอบนมือถือ
   bgVideo.play().catch(e=>console.log("Video autoplay blocked"));
 
-  // RGB glow
   document.body.style.animation = "rainbowShadow 5s infinite";
 
-  // สร้างหัวใจลอย 20 ดวง
   for(let j=0;j<20;j++){
     setTimeout(()=>{
       let heart = document.createElement("div");
@@ -138,13 +128,11 @@ document.getElementById("btnPlay").onclick = () => {
     }, j*100);
   }
 
-  // สั่นมือถือ (ถ้ารองรับ)
   if(navigator.vibrate){
     navigator.vibrate([100,50,100,50,200]);
   }
 };
 
-// ปุ่มส่งหัวใจ
 document.getElementById("btnHeart").onclick = () => {
   let heart = document.createElement("div");
   heart.classList.add("heart");
@@ -157,7 +145,6 @@ document.getElementById("btnHeart").onclick = () => {
   if(navigator.vibrate){ navigator.vibrate(200); }
 };
 
-// ปุ่มปล่อยดอกไม้
 document.getElementById("btnFlower").onclick = () => {
   for(let j=0;j<10;j++){
     setTimeout(()=>{
@@ -177,5 +164,6 @@ document.getElementById("btnFlower").onclick = () => {
 
 </body>
 </html>
+
 
 
